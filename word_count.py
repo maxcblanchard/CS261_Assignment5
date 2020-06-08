@@ -50,7 +50,7 @@ def top_words(source, number):
         for line in f:
             words = rgx.findall(line)
             for w in words:
-                # FIXME: Complete this function
+                return None
 
 
 """print(top_words("alice.txt",10))"""
