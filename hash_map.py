@@ -112,7 +112,10 @@ class HashMap:
         """
         Empties out the hash table deleting all links in the hash table.
         """
-        print(self._hash_function)
+        self.size = 0
+        for list_item in self._buckets:
+            list_item.__init__()
+
 
     def get(self, key):
         """
@@ -122,7 +125,13 @@ class HashMap:
         Return:
             The value associated to the key. None if the link isn't found.
         """
-        # FIXME: Write this function
+        hash_value = self._hash_function(key)
+        index = hash_value % self.capacity
+        list_item = self._buckets[index]
+        answer = list_item.contains(key)
+        if answer != None:
+            return answer.value
+        return None
 
     def resize_table(self, capacity):
         """
@@ -131,7 +140,14 @@ class HashMap:
         Args:
             capacity: the new number of buckets.
         """
-        # FIXME: Write this function
+        temp_buckets = self._buckets
+        self.__init__(capacity, self._hash_function)
+        for list_item in temp_buckets:
+            if list_item.head is not None:
+                cur = list_item.head
+                while cur is not None:
+                    self.put(cur.key, cur.value)
+                    cur = cur.next
 
     def put(self, key, value):
         """
@@ -144,17 +160,11 @@ class HashMap:
             key: they key to use to has the entry
             value: the value associated with the entry
         """
-        """pos = self._hash_function(key)
-        bucket = self._buckets[pos]
-
-        if bucket is None:
-            self._buckets[pos] = bucket = LinkedList()
-            bucket.put(key, value)
-
-        else:
-            bucket.put(key, value)
-            if len(bucket) >= self.capacity:
-                self.resize_table()"""
+        hash_value = self._hash_function(key)
+        index = hash_value % self.capacity
+        list_item = self._buckets[index]
+        list_item.add_front(key, value)
+        self.size += 1
 
 
     def remove(self, key):
@@ -165,7 +175,12 @@ class HashMap:
         Args:
             key: they key to search for and remove along with its value
         """
-        # FIXME: Write this function
+        hash_value = self._hash_function(key)
+        index = hash_value % self.capacity
+        list_item = self._buckets[index]
+        answer = list_item.contains(key)
+        if answer != None:
+            list_item.remove(key)
 
     def contains_key(self, key):
         """
@@ -175,17 +190,20 @@ class HashMap:
             True if the key is found False otherwise
 
         """
-        # FIXME: Write this function
+        if self.get(key) != None:
+            return True
+        return False
 
     def empty_buckets(self):
         """
         Returns:
             The number of empty buckets in the table
         """
-        n = 0
-        for bucket in self._buckets:
-            if bucket is None or len(bucket) == 0: n += 1
-        return n
+        counter = 0
+        for list_item in self._buckets:
+            if list_item.size == 0:
+                counter += 1
+        return counter
 
     def table_load(self):
         """
@@ -193,7 +211,15 @@ class HashMap:
             the ratio of (number of links) / (number of buckets) in the table as a float.
 
         """
-        # FIXME: Write this function
+        counter = 0
+        for list_item in self._buckets:
+            if list_item.head is not None:
+                cur = list_item.head
+                while cur is not None:
+                    counter += 1
+                    cur = cur.next
+
+        return counter/self.capacity
 
     def __str__(self):
         """
