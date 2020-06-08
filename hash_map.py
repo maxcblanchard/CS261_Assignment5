@@ -169,7 +169,7 @@ class HashMap:
 
     def contains_key(self, key):
         """
-        Searches to see if a key exists within the hash table
+        Searches to see if ta key exists within the hash table
 
         Returns:
             True if the key is found False otherwise
