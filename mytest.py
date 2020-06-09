@@ -1,22 +1,9 @@
 from hash_map import *
 
-""" EMPTY BUCKETS """
-print("\n\n********   EMPTY_BUCKETS()   ********")
-print("--- EXAMPLE 1 ---")
-m = HashMap(100, hash_function_1)
-print(m.empty_buckets(), m.size, m.capacity)
-m.put('key1', 10)
-print(m.empty_buckets(), m.size, m.capacity)
-m.put('key2', 20)
-print(m.empty_buckets(), m.size, m.capacity)
-m.put('key1', 30)
-print(m.empty_buckets(), m.size, m.capacity)
-m.put('key4', 40)
-print(m.empty_buckets(), m.size, m.capacity)
-
-print("--- EXAMPLE 2 ---")
-m = HashMap(50, hash_function_1)
-for i in range(150):
-    m.put('key' + str(i), i * 100)
-    if i % 30 == 0:
-        print(m.empty_buckets(), m.size, m.capacity)
+student_map = HashMap(10, hash_function_1)
+test_values = [("test_5", 5), ("test_-5", -5), ("test_5_", 5), ("diff_word", 15), ("another_word", 20),
+                       ("set", 10), ("anotha_one", -7), ("completely_different", 5), ("getting_there", -1)]
+for key, val in test_values:
+    student_map.put(key, val)
+print(student_map)
+print(student_map.size)

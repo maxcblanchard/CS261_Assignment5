@@ -163,8 +163,12 @@ class HashMap:
         hash_value = self._hash_function(key)
         index = hash_value % self.capacity
         list_item = self._buckets[index]
-        list_item.add_front(key, value)
-        self.size += 1
+        if self.get(key) is not None:
+            list_item.remove(key)
+            list_item.add_front(key, value)
+        else:
+            list_item.add_front(key, value)
+            self.size += 1
 
 
     def remove(self, key):
