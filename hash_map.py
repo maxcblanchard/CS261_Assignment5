@@ -158,7 +158,7 @@ class HashMap:
 
         Args:
             key: they key to use to has the entry
-            value: the value associated with the entry
+            value: the valdue associated with the entry
         """
         hash_value = self._hash_function(key)
         index = hash_value % self.capacity
