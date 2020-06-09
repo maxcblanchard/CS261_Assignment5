@@ -151,7 +151,7 @@ class HashMap:
 
     def put(self, key, value):
         """
-        Updates the given key-value pair in the hash table. If a link with the given
+        Updatesf the given key-value pair in the hash table. If a link with the given
         key already exists, this will just update the value and skip traversing. Otherwise,
         it will create a new link with the given key and value and add it to the table
         bucket's linked list.
