@@ -72,6 +72,3 @@ def top_words(source, number):
         final_tuples.append(temp_list[k])
 
     return final_tuples
-
-
-print(top_words("alice.txt",10))
