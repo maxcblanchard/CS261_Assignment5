@@ -16,6 +16,7 @@ modify it for your assignment submission.
 """
 rgx = re.compile("(\w[\w']*\w|\w)")
 
+
 def hash_function_2(key):
     """
     This is a hash function that can be used for the hashmap.
@@ -27,6 +28,7 @@ def hash_function_2(key):
         hash = hash + (index + 1) * ord(i)
         index = index + 1
     return hash
+
 
 def top_words(source, number):
     """
@@ -50,7 +52,26 @@ def top_words(source, number):
         for line in f:
             words = rgx.findall(line)
             for w in words:
-                return None
+                w = w.lower()
+                value = 1
+                if ht.contains_key(w):
+                    value = ht.get(w) + 1
+                    ht.put(w, value)
+                else:
+                    ht.put(w, value)
+
+    temp_list = ht.word_count_list()
+    lst = len(temp_list)
+    for i in range(0, lst):
+        for j in range(0, lst-i-1):
+            if temp_list[j][1] < temp_list[j + 1][1]:
+                temp_list[j], temp_list[j+1] = temp_list[j+1], temp_list[j]
+
+    final_tuples = []
+    for k in range(0, number):
+        final_tuples.append(temp_list[k])
+
+    return final_tuples
 
 
-"""print(top_words("alice.txt",10))"""
+print(top_words("alice.txt",10))

@@ -129,7 +129,7 @@ class HashMap:
         index = hash_value % self.capacity
         list_item = self._buckets[index]
         answer = list_item.contains(key)
-        if answer != None:
+        if answer is not None:
             return answer.value
         return None
 
@@ -183,7 +183,7 @@ class HashMap:
         index = hash_value % self.capacity
         list_item = self._buckets[index]
         answer = list_item.contains(key)
-        if answer != None:
+        if answer is not None:
             list_item.remove(key)
 
     def contains_key(self, key):
@@ -194,7 +194,7 @@ class HashMap:
             True if the key is found False otherwise
 
         """
-        if self.get(key) != None:
+        if self.get(key) is not None:
             return True
         return False
 
@@ -224,6 +224,16 @@ class HashMap:
                     cur = cur.next
 
         return counter/self.capacity
+
+    def word_count_list(self):
+        word_count_list = []
+        for list_item in self._buckets:
+            cur = list_item.head
+            while cur is not None:
+                word = (cur.key, cur.value)
+                word_count_list.append(word)
+                cur = cur.next
+        return word_count_list
 
     def __str__(self):
         """
